@@ -1,0 +1,49 @@
+[versions]
+ktorVersion = "3.0.3"
+kotlinVersion = "2.1.0"
+logbackVersion = "1.4.14"
+rateLimiterVersion = "2.1.1"
+exposedVersion = "0.57.0"
+postgresDriverVersion = "42.7.4"
+
+[libraries]
+ktorServerNetty = { group = "io.ktor", name = "ktor-server-netty-jvm", version.ref = "ktorVersion" }
+ktorServerCore = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktorVersion" }
+ktorServerAuth = { group = "io.ktor", name = "ktor-server-auth-jvm", version.ref = "ktorVersion" }
+ktorServerAuthJwt = { group = "io.ktor", name = "ktor-server-auth-jwt-jvm", version.ref = "ktorVersion" }
+ktorServerHostCommon = { group = "io.ktor", name = "ktor-server-host-common-jvm", version.ref = "ktorVersion" }
+ktorServerDefaultHeaders = { group = "io.ktor", name = "ktor-server-default-headers", version.ref = "ktorVersion" }
+ktorServerStatusPages = { group = "io.ktor", name = "ktor-server-status-pages-jvm", version.ref = "ktorVersion" }
+ktorServerCors = { group = "io.ktor", name = "ktor-server-cors-jvm", version.ref = "ktorVersion" }
+ktorServerCallLogging = { group = "io.ktor", name = "ktor-server-call-logging-jvm", version.ref = "ktorVersion" }
+ktorServerCallId = { group = "io.ktor", name = "ktor-server-call-id-jvm", version.ref = "ktorVersion" }
+ktorServerMetrics = { group = "io.ktor", name = "ktor-server-metrics-micrometer-jvm", version.ref = "ktorVersion" }
+ktorServerContentNegotiation = { group = "io.ktor", name = "ktor-server-content-negotiation-jvm", version.ref = "ktorVersion" }
+ktorServerJacksonSerialization = { group = "io.ktor", name = "ktor-serialization-jackson-jvm", version.ref = "ktorVersion" }
+ktorServerKotlinXSerialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json-jvm", version.ref = "ktorVersion" }
+
+exposedCore = { group = "org.jetbrains.exposed", name = "exposed-core", version.ref = "exposedVersion" }
+exposedJdbc = { group = "org.jetbrains.exposed", name = "exposed-jdbc", version.ref = "exposedVersion" }
+exposedDao = { group = "org.jetbrains.exposed", name = "exposed-dao", version.ref = "exposedVersion" }
+exposedJavaTime = { group = "org.jetbrains.exposed", name = "exposed-java-time", version.ref = "exposedVersion" }
+postgresDriver = { group = "org.postgresql", name = "postgresql", version.ref = "postgresDriverVersion" }
+
+logback = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logbackVersion" }
+rateLimiter = { group = "io.github.flaxoos", name = "ktor-server-rate-limiting", version.ref = "rateLimiterVersion" }
+healthCheck = { group = "dev.hayden", name = "khealth", version = "3.0.1" }
+micrometrRegistry = { group = "io.micrometer", name = "micrometer-registry-prometheus", version = "1.6.13" }
+kodein = { group = "org.kodein.di", name = "kodein-di-jvm", version = "7.22.0" }
+config4k = { group = "io.github.config4k", name = "config4k", version = "0.7.0" }
+jacksonJsr310 = { group = "com.fasterxml.jackson.datatype", name = "jackson-datatype-jsr310", version = "2.18.2" }
+jacksonKotlinModule = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.18.2" }
+jbcrypt = { group = "org.mindrot", name = "jbcrypt", version = "0.4" }
+
+ktorServerTestHost = { group = "io.ktor", name = "ktor-server-test-host-jvm", version.ref = "ktorVersion" }
+junitTests = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlinVersion" }
+
+[bundles]
+tools = ["logback", "rateLimiter", "healthCheck", "micrometrRegistry", "kodein", "config4k", "jbcrypt", "jacksonJsr310", "jacksonKotlinModule"]
+ktor = ["ktorServerNetty", "ktorServerCore", "ktorServerAuth", "ktorServerAuthJwt", "ktorServerHostCommon",
+    "ktorServerDefaultHeaders", "ktorServerStatusPages", "ktorServerCors", "ktorServerCallLogging", "ktorServerCallId",
+    "ktorServerMetrics", "ktorServerContentNegotiation", "ktorServerJacksonSerialization", "ktorServerKotlinXSerialization"]
+db = ["exposedCore", "exposedJdbc", "exposedDao", "exposedJavaTime", "postgresDriver"]
