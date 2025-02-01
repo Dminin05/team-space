@@ -37,6 +37,8 @@ config4k = { group = "io.github.config4k", name = "config4k", version = "0.7.0" 
 jacksonJsr310 = { group = "com.fasterxml.jackson.datatype", name = "jackson-datatype-jsr310", version = "2.18.2" }
 jacksonKotlinModule = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.18.2" }
 jbcrypt = { group = "org.mindrot", name = "jbcrypt", version = "0.4" }
+amazonS3 = { group = "com.amazonaws", name = "aws-java-sdk", version = "1.12.651" }
+slf4j = { group = "org.slf4j", name = "slf4j-api", version = "2.0.12" }
 
 ktorServerTestHost = { group = "io.ktor", name = "ktor-server-test-host-jvm", version.ref = "ktorVersion" }
 junitTests = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlinVersion" }

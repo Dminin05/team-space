@@ -8,7 +8,7 @@ group = "com.minin"
 version = "0.0.1"
 
 application {
-    mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClass.set("com.minin.Starter.kt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -24,6 +24,7 @@ dependencies {
     implementation(rootProject.libs.bundles.ktor)
     implementation(rootProject.libs.bundles.db)
     implementation(rootProject.libs.bundles.tools)
+    implementation(rootProject.libs.amazonS3)
     testImplementation(rootProject.libs.ktorServerTestHost)
     testImplementation(rootProject.libs.junitTests)
 }
