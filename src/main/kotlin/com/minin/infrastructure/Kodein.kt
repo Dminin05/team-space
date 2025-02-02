@@ -7,6 +7,11 @@ import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.minin.WebStarter
+import com.minin.app.controller.AuthController
+import com.minin.app.repository.UserRepository
+import com.minin.app.repository.UserRepositoryImpl
+import com.minin.app.service.impl.AuthService
+import com.minin.app.service.impl.AuthServiceImpl
 import com.minin.infrastructure.config.AppConfig
 import com.minin.infrastructure.config.Controller
 import com.typesafe.config.ConfigFactory
@@ -15,7 +20,16 @@ import org.kodein.di.*
 
 internal val controllers = DI.Module("controllers") {
     bindSet<Controller> {
+        bind { singleton { AuthController(instance()) } }
     }
+}
+
+internal val services = DI.Module("services") {
+    bind<AuthService> { singleton { AuthServiceImpl(instance(), instance()) } }
+}
+
+internal val repositories = DI.Module("repositories") {
+    bind<UserRepository> { singleton { UserRepositoryImpl() } }
 }
 
 internal val s3 = DI.Module("s3") {
@@ -47,6 +61,8 @@ internal val s3 = DI.Module("s3") {
 val kodein = DI {
     importOnce(s3)
     importOnce(controllers)
+    importOnce(services)
+    importOnce(repositories)
     bind { singleton { ConfigFactory.load().extract<AppConfig>("app") } }
     bind<WebStarter>() with singleton { WebStarter(instance(), instance()) }
 }

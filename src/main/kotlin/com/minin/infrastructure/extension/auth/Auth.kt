@@ -20,13 +20,13 @@ fun RoutingCall.getPrincipal(): CustomPrincipal {
     val claims = this.principal<JWTPrincipal>()!!.payload.claims
     return CustomPrincipal(
         id = claims["id"]!!.asLong(),
-        username = claims["username"]!!.asString(),
+        email = claims["email"]!!.asString(),
         role = claims["role"]!!.asString()
     )
 }
 
 data class CustomPrincipal(
     val id: Long,
-    val username: String,
+    val email: String,
     val role: String
 )
