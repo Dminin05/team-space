@@ -2,7 +2,7 @@ package com.minin.app.controller
 
 import com.minin.app.dto.auth.LoginRequest
 import com.minin.app.dto.auth.RegistrationRequest
-import com.minin.app.service.impl.AuthService
+import com.minin.app.service.AuthService
 import com.minin.infrastructure.config.Controller
 import io.ktor.server.request.*
 import io.ktor.server.response.*

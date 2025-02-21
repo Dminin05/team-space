@@ -12,6 +12,7 @@ object Users : LongIdTable() {
     val email = varchar("email", 50)
     val password = varchar("password", 1024)
     val role = enumerationByName("role", 10, Role::class)
+    val companyId = optReference("company_id", Companies)
 }
 
 class UserDao(id: EntityID<Long>): LongEntity(id) {
@@ -22,13 +23,17 @@ class UserDao(id: EntityID<Long>): LongEntity(id) {
     var password by Users.password
     var role by Users.role
 
+    var companyId by Users.companyId
+    var company by CompanyDao optionalReferencedOn Users.companyId
+
     fun toSerializable() = User(
         id.value,
         firstName,
         lastName,
         email,
         password,
-        role
+        role,
+        companyId?.value
     )
 }
 
@@ -38,5 +43,6 @@ data class User(
     val lastName: String,
     val email: String,
     val password: String,
-    val role: Role
+    val role: Role,
+    val companyId: Long? = null
 )

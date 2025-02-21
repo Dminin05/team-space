@@ -7,11 +7,9 @@ import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.minin.WebStarter
-import com.minin.app.controller.AuthController
-import com.minin.app.repository.UserRepository
-import com.minin.app.repository.UserRepositoryImpl
-import com.minin.app.service.impl.AuthService
-import com.minin.app.service.impl.AuthServiceImpl
+import com.minin.app.controller.*
+import com.minin.app.repository.*
+import com.minin.app.service.*
 import com.minin.infrastructure.config.AppConfig
 import com.minin.infrastructure.config.Controller
 import com.typesafe.config.ConfigFactory
@@ -21,15 +19,29 @@ import org.kodein.di.*
 internal val controllers = DI.Module("controllers") {
     bindSet<Controller> {
         bind { singleton { AuthController(instance()) } }
+        bind { singleton { CompanyController(instance()) } }
+        bind { singleton { WorkspaceController(instance()) } }
+        bind { singleton { InvitationController(instance(), instance()) } }
+        bind { singleton { ProjectController(instance()) } }
     }
-}
-
-internal val services = DI.Module("services") {
-    bind<AuthService> { singleton { AuthServiceImpl(instance(), instance()) } }
 }
 
 internal val repositories = DI.Module("repositories") {
     bind<UserRepository> { singleton { UserRepositoryImpl() } }
+    bind<CompanyRepository> { singleton { CompanyRepositoryImpl() } }
+    bind<WorkspaceRepository> {  singleton { WorkspaceRepositoryImpl() } }
+    bind<InvitationRepository> {  singleton { InvitationRepositoryImpl() } }
+    bind<ProjectRepository> {  singleton { ProjectRepositoryImpl() } }
+}
+
+
+internal val services = DI.Module("services") {
+    bind<AuthService> { singleton { AuthServiceImpl(instance(), instance(), instance()) } }
+    bind<CompanyService> { singleton { CompanyServiceImpl(instance(), instance()) } }
+    bind<WorkspaceService> { singleton { WorkspaceServiceImpl(instance()) } }
+    bind<InvitationService> { singleton { InvitationServiceImpl(instance(), instance(), instance()) } }
+    bind<MailSender> { singleton { MailSenderImpl(instance()) } }
+    bind<ProjectService> { singleton { ProjectServiceImpl(instance()) } }
 }
 
 internal val s3 = DI.Module("s3") {

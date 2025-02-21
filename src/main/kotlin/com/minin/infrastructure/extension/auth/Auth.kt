@@ -30,3 +30,8 @@ data class CustomPrincipal(
     val email: String,
     val role: String
 )
+
+object AuthConstants {
+    const val USER = "user"
+    const val ADMIN = "admin"
+}

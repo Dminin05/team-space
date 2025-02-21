@@ -3,7 +3,8 @@ package com.minin.infrastructure.config
 data class AppConfig(
     val database: DatabaseConfig,
     val security: SecurityConfig,
-    val s3: S3Properties
+    val s3: S3Properties,
+    val mail: Mail
 )
 
 data class DatabaseConfig(
@@ -25,4 +26,11 @@ data class S3Properties(
     val secretAccessKey: String,
     val serviceEndpoint: String,
     val region: String
+)
+
+data class Mail(
+    val host: String,
+    val username: String,
+    val password: String,
+    val senderEmail: String,
 )

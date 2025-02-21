@@ -25,6 +25,8 @@ dependencies {
     implementation(rootProject.libs.bundles.db)
     implementation(rootProject.libs.bundles.tools)
     implementation(rootProject.libs.amazonS3)
+    implementation("org.apache.commons:commons-email:1.6.0")
+
     testImplementation(rootProject.libs.ktorServerTestHost)
     testImplementation(rootProject.libs.junitTests)
 }

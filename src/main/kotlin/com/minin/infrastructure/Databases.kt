@@ -1,6 +1,6 @@
 package com.minin.infrastructure
 
-import com.minin.app.model.Users
+import com.minin.app.model.*
 import com.minin.infrastructure.config.AppConfig
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
@@ -15,6 +15,6 @@ fun Application.configureDatabases(appConfig: AppConfig) {
     )
 
     transaction(database) {
-        SchemaUtils.createMissingTablesAndColumns(Users)
+        SchemaUtils.createMissingTablesAndColumns(Users, Companies, Workspaces, Invitations, Projects)
     }
 }
