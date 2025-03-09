@@ -1,3 +1,5 @@
+import io.ktor.plugin.features.*
+
 plugins {
     kotlin("jvm") version libs.versions.kotlinVersion
     id("io.ktor.plugin") version libs.versions.ktorVersion
@@ -19,6 +21,30 @@ repositories {
     maven { url = uri("https://jitpack.io") }
     maven { url = uri("https://packages.confluent.io/maven/") }
 }
+
+ktor {
+    docker {
+        val username = System.getenv("DOCKER_USERNAME")
+        val password = System.getenv("DOCKER_PASSWORD")
+        localImageName.set("$username/team_space")
+        imageTag.set("latest")
+        externalRegistry.set(
+            DockerImageRegistry.dockerHub(
+                appName = provider { "team_space" },
+                username = provider { username },
+                password = provider { password }
+            )
+        )
+    }
+}
+
+tasks.register("buildAndPushDocker") {
+    group = "docker"
+    description = "Собирает проект, создает Docker-образ и отправляет его в реестр"
+
+    dependsOn("clean", "buildImage", "publishImage")
+}
+
 
 dependencies {
     implementation(rootProject.libs.bundles.ktor)
